@@ -123,7 +123,9 @@ class foreman_proxy::config {
   } else {
     # The puppet-agent (puppet 4 AIO package) doesn't create a puppet user and group
     # but the foreman proxy still needs to be able to read the agent's private key
-    if $foreman_proxy::manage_puppet_group {
+    # if $foreman_proxy::manage_puppet_group {
+    $manage_puppet_group = true
+    if $manage_puppet_group {
       if !defined(Group[$foreman_proxy::puppet_group]) {
         group { $foreman_proxy::puppet_group:
           ensure => 'present',
